@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Publisher - Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body {
+            background: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            width: 100%;
+            max-width: 480px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #000;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 22px;
+            font-weight: 600;
+        }
+        
+        .header p {
+            font-size: 13px;
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+        
+        .content {
+            padding: 24px;
+        }
+        
+        .login-section {
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        .login-btn {
+            background: #000;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.2s;
+        }
+        
+        .login-btn:hover {
+            background: #222;
+        }
+        
+        .user-info {
+            display: none;
+            align-items: center;
+            gap: 12px;
+            background: #f8f8f8;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .user-info img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #ddd;
+        }
+        
+        .user-info .name {
+            font-weight: 600;
+            font-size: 15px;
+        }
+        
+        .user-info .status {
+            font-size: 12px;
+            color: #00c853;
+        }
+        
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .media-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .media-btn {
+            border: 2px solid #eee;
+            background: white;
+            padding: 16px 8px;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.2s;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .media-btn:hover {
+            border-color: #000;
+        }
+        
+        .media-btn.active {
+            border-color: #000;
+            background: #000;
+            color: white;
+        }
+        
+        .media-btn span {
+            display: block;
+            font-size: 22px;
+            margin-bottom: 6px;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 100px;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 15px;
+            resize: none;
+            margin-bottom: 16px;
+            outline: none;
+            transition: 0.2s;
+        }
+        
+        textarea:focus {
+            border-color: #000;
+        }
+        
+        select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            font-size: 15px;
+            margin-bottom: 20px;
+            outline: none;
+            background: white;
+            cursor: pointer;
+        }
+        
+        .publish-btn {
+            width: 100%;
+            background: #fe2c55;
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        
+        .publish-btn:hover {
+            background: #e0254a;
+        }
+        
+        .publish-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .success-message {
+            display: none;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 16px;
+            font-weight: 500;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>TikTok Publisher</h1>
+            <p>Publish photos & videos to TikTok</p>
+        </div>
+        
+        <div class="content">
+            <!-- Login Section -->
+            <div id="loginSection" class="login-section">
+                <button class="login-btn" onclick="login()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.7a8.23 8.23 0 0 0 4.77 1.52V6.69h-.01z"/>
+                    </svg>
+                    Login with TikTok
+                </button>
+            </div>
+            
+            <!-- After Login -->
+            <div id="appSection" class="hidden">
+                <div class="user-info" id="userInfo">
+                    <img src="https://via.placeholder.com/42" alt="avatar">
+                    <div>
+                        <div class="name">@demo_user</div>
+                        <div class="status">Connected</div>
+                    </div>
+                </div>
+                
+                <div class="section-title">Select Media Type</div>
+                <div class="media-buttons">
+                    <button class="media-btn" onclick="selectMedia(this, 'photo')">
+                        <span>🖼️</span>
+                        Single Photo
+                    </button>
+                    <button class="media-btn" onclick="selectMedia(this, 'carousel')">
+                        <span>🖼️🖼️</span>
+                        Photo Group
+                    </button>
+                    <button class="media-btn" onclick="selectMedia(this, 'video')">
+                        <span>🎬</span>
+                        Video
+                    </button>
+                </div>
+                
+                <div class="section-title">Caption</div>
+                <textarea id="caption" placeholder="Write your caption here... #fyp #viral"></textarea>
+                
+                <div class="section-title">Privacy</div>
+                <select id="privacy">
+                    <option value="PUBLIC_TO_EVERYONE">Everyone</option>
+                    <option value="MUTUAL_FOLLOW_FRIENDS">Friends</option>
+                    <option value="FOLLOWER_OF_CREATOR">Followers</option>
+                    <option value="SELF_ONLY">Only Me</option>
+                </select>
+                
+                <button class="publish-btn" onclick="publish()">Publish to TikTok</button>
+                
+                <div id="successMsg" class="success-message">
+                    ✅ Content published successfully!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedMedia = null;
+        
+        function login() {
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('appSection').classList.remove('hidden');
+            document.getElementById('userInfo').style.display = 'flex';
+        }
+        
+        function selectMedia(btn, type) {
+            document.querySelectorAll('.media-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedMedia = type;
+        }
+        
+        function publish() {
+            if (!selectedMedia) {
+                alert('Please select a media type first');
+                return;
+            }
+            
+            const caption = document.getElementById('caption').value;
+            if (!caption.trim()) {
+                alert('Please write a caption');
+                return;
+            }
+            
+            // Simulate publishing
+            const btn = document.querySelector('.publish-btn');
+            btn.disabled = true;
+            btn.textContent = 'Publishing...';
+            
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.textContent = 'Publish to TikTok';
+                document.getElementById('successMsg').style.display = 'block';
+                
+                setTimeout(() => {
+                    document.getElementById('successMsg').style.display = 'none';
+                }, 3000);
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
