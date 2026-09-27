@@ -4,25 +4,212 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TikTok Publisher</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #fafafa;
+            color: #111;
+            line-height: 1.6;
+        }
+        header {
+            background: #000;
+            color: white;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+        }
+        header h1 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .hero {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 24px;
+            text-align: center;
+        }
+        .hero img.logo {
+            width: 90px;
+            height: 90px;
+            border-radius: 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+        .hero h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .hero p {
+            font-size: 18px;
+            color: #555;
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+        .btn {
+            display: inline-block;
+            background: #fe2c55;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+        .btn:hover { background: #e0254a; }
+        .features {
+            max-width: 900px;
+            margin: 80px auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+        .feature {
+            background: white;
+            padding: 28px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            text-align: center;
+        }
+        .feature .icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+        .feature h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+        .feature p {
+            font-size: 14px;
+            color: #666;
+        }
+        .how-it-works {
+            max-width: 700px;
+            margin: 80px auto;
+            padding: 0 24px;
+        }
+        .how-it-works h2 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 40px;
+        }
+        .step {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 28px;
+            align-items: flex-start;
+        }
+        .step-number {
+            background: #000;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        footer {
+            background: #111;
+            color: #aaa;
+            text-align: center;
+            padding: 40px 24px;
+            margin-top: 80px;
+            font-size: 14px;
+        }
+        footer a {
+            color: #fe2c55;
+            text-decoration: none;
+            margin: 0 12px;
+        }
+        footer a:hover { text-decoration: underline; }
+    </style>
 </head>
 <body>
-    <h1>TikTok Publisher</h1>
+    <header>
+        <img src="icon.png" alt="TikTok Publisher">
+        <h1>TikTok Publisher</h1>
+    </header>
 
-    <p>
-        TikTok Publisher is a desktop application that allows users
-        to connect their TikTok account and publish photos and videos
-        from their computer.
-    </p>
+    <section class="hero">
+        <img src="icon.png" alt="Logo" class="logo">
+        <h2>Publish to TikTok Easily</h2>
+        <p>
+            TikTok Publisher is a desktop application that lets you connect your TikTok account 
+            and publish single photos, photo carousels, and videos directly from your computer.
+        </p>
+        <a href="demo.html" class="btn">Try Demo</a>
+    </section>
 
-    <h2>Legal Information</h2>
+    <section class="features">
+        <div class="feature">
+            <div class="icon">🖼️</div>
+            <h3>Single Photo</h3>
+            <p>Upload one photo with a caption and publish it to your TikTok account.</p>
+        </div>
+        <div class="feature">
+            <div class="icon">🖼️🖼️</div>
+            <h3>Photo Carousel</h3>
+            <p>Publish a group of photos together as a carousel post.</p>
+        </div>
+        <div class="feature">
+            <div class="icon">🎬</div>
+            <h3>Video Upload</h3>
+            <p>Upload videos with captions and choose privacy settings.</p>
+        </div>
+    </section>
 
-    <ul>
-        <li>
+    <section class="how-it-works">
+        <h2>How it works</h2>
+        <div class="step">
+            <div class="step-number">1</div>
+            <div>
+                <strong>Login with TikTok</strong><br>
+                Connect your TikTok account securely using official Login Kit.
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <div>
+                <strong>Select your media</strong><br>
+                Choose a single photo, multiple photos, or a video from your computer.
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-number">3</div>
+            <div>
+                <strong>Add caption & privacy</strong><br>
+                Write your caption and select who can see the post.
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-number">4</div>
+            <div>
+                <strong>Publish</strong><br>
+                Content is published to your TikTok account using the official Content Posting API.
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>
             <a href="terms.html">Terms of Service</a>
-        </li>
-        <li>
             <a href="privacy.html">Privacy Policy</a>
-        </li>
-    </ul>
+            <a href="demo.html">Demo</a>
+        </p>
+        <p style="margin-top: 16px;">© 2026 TikTok Publisher</p>
+    </footer>
 </body>
 </html>
